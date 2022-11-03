@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const CoinItem = ({ coin }) => {
-  const currentValue = 0;
-  const { image, name, symbol, current_price } = coin;
+const CoinItem = ({ coin, currentAmount }) => {
+  //const currentAmount = 0;
+  const newCoin = { ...coin, amount: currentAmount };
+  const { image, name, symbol, current_price, amount } = newCoin;
 
   return (
     <View style={styles.containerItem}>
@@ -15,8 +16,8 @@ const CoinItem = ({ coin }) => {
         </View>
       </View>
       <View>
-        <Text style={styles.textPrice}>${current_price}</Text>
-        <Text style={[styles.pricePercentage]}>{currentValue}</Text>
+        <Text style={styles.currentAmount}>${amount}</Text>
+        <Text style={[styles.marketValue]}>${current_price.toFixed(2)}</Text>
       </View>
     </View>
   );
@@ -39,11 +40,12 @@ const styles = StyleSheet.create({
   text: {
     color: '#000',
   },
-  textPrice: {
+  currentAmount: {
     color: '#000',
     fontWeight: 'bold',
+    textAlign: 'right',
   },
-  pricePercentage: {
+  marketValue: {
     textAlign: 'right',
   },
   priceUp: {

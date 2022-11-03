@@ -3,12 +3,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import React from 'react';
 
-const TopBalance = ({ setView }) => {
+const TopBalance = ({ setView, balance }) => {
   console.log('test');
   return (
     <View style={styles.balanceContainer}>
       <Text style={styles.balanceText}>Total</Text>
-      <Text style={styles.balanceAmount}>$80.00</Text>
+      <Text style={styles.balanceAmount}>${balance.toFixed(2)}</Text>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={styles.buttonContainer}

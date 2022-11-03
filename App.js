@@ -1,10 +1,14 @@
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import TopBalance from './components/TopBalance';
 import ListBalance from './components/ListBalance';
+import Exchange from './components/Exchange';
+import { initialAmountUsd } from './data/dummyData.json';
 
 const App = () => {
   const [coins, setCoins] = useState([]);
+  const [view, setView] = useState(0);
+  const [balance, setBalance] = useState(initialAmountUsd);
 
   const getData = async () => {
     const res = await fetch(
@@ -12,19 +16,17 @@ const App = () => {
     );
     const data = await res.json();
     setCoins(data);
+    //console.log(coins);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  const viewsList = ['Vista 1', 'Vista 2'];
-  const [view, setView] = useState(0);
-
   return (
     <>
-      <TopBalance setView={setView} />
-      {view === 0 ? <ListBalance coins={coins} /> : <Text>Vista 2</Text>}
+      <TopBalance setView={setView} balance={balance} />
+      {view === 0 ? <ListBalance coins={coins} /> : <Exchange />}
     </>
   );
 };

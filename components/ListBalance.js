@@ -1,15 +1,32 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import React from 'react';
 import CoinItem from './CoinItem';
+import {
+  initialAmountCrypto,
+  initialAmountUsd,
+} from './../data/dummyData.json';
 
 const ListBalance = ({ coins }) => {
+  const defaultCoin = {
+    image:
+      'https://img.freepik.com/premium-vector/dollar-sign-flat-icon-vector-illustration_686498-432.jpg?w=360',
+    name: 'USD',
+    symbol: 'USD',
+    current_price: 1,
+    initialAmountUsd,
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={styles.list}>
+      <CoinItem coin={defaultCoin} currentAmount={initialAmountUsd} />
       <FlatList
-        style={styles.list}
         data={coins}
         renderItem={({ item }) => {
-          return <CoinItem coin={item} />;
+          return (
+            <>
+              <CoinItem coin={item} currentAmount={initialAmountCrypto} />
+            </>
+          );
         }}
       />
     </View>
@@ -19,12 +36,6 @@ const ListBalance = ({ coins }) => {
 export default ListBalance;
 
 const styles = StyleSheet.create({
-  container: {
-    //backgroundColor: '#F7F8FA',
-    //alignItems: 'center',
-    //flex: 1,
-    //width: '100%',
-  },
   list: {
     width: '100%',
     paddingHorizontal: 30,
