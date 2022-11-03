@@ -1,9 +1,7 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import CoinItem from './components/CoinItem';
-import Balance from './components/Balance';
-import { TabView, Tab } from 'react-native-tab-view-easy';
-import CustomTabBar from './components/CustomTabBar';
+import TopBalance from './components/TopBalance';
+import ListBalance from './components/ListBalance';
 
 const App = () => {
   const [coins, setCoins] = useState([]);
@@ -20,40 +18,17 @@ const App = () => {
     getData();
   }, []);
 
+  const viewsList = ['Vista 1', 'Vista 2'];
+  const [view, setView] = useState(0);
+
   return (
     <>
-      <Balance />
-      {/* <CustomTabBar /> */}
-      <TabView style={styles.container} indicatorStyle={{ color: 'red' }}>
-        <Tab title={'Tab 1'} backgroundColor={'red'}>
-          <FlatList
-            style={styles.list}
-            data={coins}
-            renderItem={({ item }) => {
-              //console.log(item);
-              return <CoinItem coin={item} />;
-            }}
-          />
-        </Tab>
-        <Tab title={'Tab 2'}>
-          <Text>Content</Text>
-        </Tab>
-      </TabView>
+      <TopBalance setView={setView} />
+      {view === 0 ? <ListBalance coins={coins} /> : <Text>Vista 2</Text>}
     </>
   );
 };
 
 export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    //backgroundColor: '#F7F8FA',
-    //alignItems: 'center',
-    //flex: 1,
-    //width: '100%',
-  },
-  list: {
-    width: '100%',
-    paddingHorizontal: 20,
-  },
-});
+const styles = StyleSheet.create({});

@@ -3,29 +3,33 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import React from 'react';
 
-const Balance = () => {
+const TopBalance = ({ setView }) => {
   console.log('test');
   return (
     <View style={styles.balanceContainer}>
-      <Text style={styles.balanceText}>Balance</Text>
+      <Text style={styles.balanceText}>Total</Text>
       <Text style={styles.balanceAmount}>$80.00</Text>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => setView(0)}
+        >
           <Icon name={'arrow-top-right'} style={styles.icon} />
-          <Text style={styles.button}>Send</Text>
+          <Text style={styles.button}>Balance</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => setView(1)}
+        >
           <Icon name={'arrow-bottom-left'} style={styles.icon} />
-          <Text style={styles.button}>Receive</Text>
+          <Text style={styles.button}>Exchange</Text>
         </TouchableOpacity>
-        {/* <Button style={styles.button} title="Send" />
-        <Button style={styles.button} title="Receive" /> */}
       </View>
     </View>
   );
 };
 
-export default Balance;
+export default TopBalance;
 
 const styles = StyleSheet.create({
   balanceContainer: {
