@@ -1,4 +1,10 @@
 {
-  "initialAmountUsd": 100,
-  "initialAmountCrypto": 0
+  "initialAmountCrypto": 0,
+  "defaultCoin": {
+    "image": "https://img.freepik.com/premium-vector/dollar-sign-flat-icon-vector-illustration_686498-432.jpg?w=360",
+    "name": "USD",
+    "symbol": "USD",
+    "current_price": 1,
+    "amount": 100
+  }
 }

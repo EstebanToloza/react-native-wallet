@@ -4,24 +4,44 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 import React, { useState } from 'react';
 
-const Exchange = () => {
+const Exchange = ({ coins, setBalance }) => {
   const [number, onChangeNumber] = useState(0);
   const [number2, onChangeNumber2] = useState(0);
 
-  console.log(number);
-  console.log(number2);
+  const coinsData = coins.map((coin) => {
+    const data = {
+      name: coin.name,
+      amount: (coin.amount && coin.amount) || 0,
+      current_price: coin.current_price,
+    };
+    return data;
+  });
+
+  const coinsName = coins.map((coin) => coin.name);
+
+  console.log(coinsData);
 
   const handleCompra = () => {
     const resultado = number * number2;
-    return console.log(resultado);
+    setBalance(resultado);
   };
 
   return (
     <View>
-      <Text>Quiero vender</Text>
+      <Text>Quiero vender...</Text>
+      <SelectDropdown
+        data={coinsName}
+        defaultButtonText="Elegir Moneda"
+        onSelect={(selectedItem, index) => {
+          console.log(selectedItem, index);
+        }}
+      />
+
       <TextInput
         style={styles.input}
         keyboardType="numeric"
@@ -29,7 +49,14 @@ const Exchange = () => {
         value={number}
         placeholder="useless placeholder"
       />
-      <Text>Quiero comprar</Text>
+      <Text>Quiero comprar...</Text>
+      <SelectDropdown
+        data={coinsName}
+        defaultButtonText="Elegir Moneda"
+        onSelect={(selectedItem, index) => {
+          console.log(selectedItem, index);
+        }}
+      />
       <TextInput
         style={styles.input}
         keyboardType="numeric"
@@ -38,7 +65,7 @@ const Exchange = () => {
         placeholder="useless placeholder"
       />
       <TouchableOpacity onPress={() => handleCompra()}>
-        <Text>Comprar</Text>
+        <Text>Consirmar Operación</Text>
       </TouchableOpacity>
     </View>
   );

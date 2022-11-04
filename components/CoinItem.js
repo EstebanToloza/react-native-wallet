@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const CoinItem = ({ coin, currentAmount }) => {
-  //const currentAmount = 0;
-  const newCoin = { ...coin, amount: currentAmount };
-  const { image, name, symbol, current_price, amount } = newCoin;
+const CoinItem = ({ coin }) => {
+  const { image, name, symbol, current_price, amount } = coin;
 
   return (
     <View style={styles.containerItem}>
@@ -16,7 +14,7 @@ const CoinItem = ({ coin, currentAmount }) => {
         </View>
       </View>
       <View>
-        <Text style={styles.currentAmount}>${amount}</Text>
+        <Text style={styles.currentAmount}>${!amount ? 0 : amount}</Text>
         <Text style={[styles.marketValue]}>${current_price.toFixed(2)}</Text>
       </View>
     </View>
